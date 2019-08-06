@@ -1,0 +1,175 @@
+object frmCrudEdit: TfrmCrudEdit
+  Left = 880
+  Top = 170
+  BorderStyle = bsNone
+  Caption = 'frmCrudEdit'
+  ClientHeight = 616
+  ClientWidth = 831
+  Color = 3288877
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlBorda: TPanel
+    Left = 0
+    Top = 0
+    Width = 831
+    Height = 616
+    Align = alClient
+    BevelOuter = bvNone
+    Color = 1885894
+    Padding.Left = 1
+    Padding.Top = 1
+    Padding.Right = 1
+    Padding.Bottom = 1
+    ParentBackground = False
+    ShowCaption = False
+    TabOrder = 0
+    object pnlMain: TPanel
+      Left = 1
+      Top = 1
+      Width = 829
+      Height = 614
+      Align = alClient
+      BevelOuter = bvNone
+      Color = 3288877
+      ParentBackground = False
+      ShowCaption = False
+      TabOrder = 0
+      DesignSize = (
+        829
+        614)
+      object pnlEditMain: TPanel
+        AlignWithMargins = True
+        Left = 20
+        Top = 20
+        Width = 789
+        Height = 574
+        Margins.Left = 20
+        Margins.Top = 20
+        Margins.Right = 20
+        Margins.Bottom = 20
+        Align = alClient
+        BevelOuter = bvNone
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        Font.Quality = fqClearType
+        ParentBackground = False
+        ParentFont = False
+        ShowCaption = False
+        TabOrder = 0
+      end
+      object pnlBotoes: TPanel
+        Left = 32
+        Top = 568
+        Width = 767
+        Height = 46
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        BevelOuter = bvNone
+        Color = 10707477
+        ParentBackground = False
+        ShowCaption = False
+        TabOrder = 1
+        object pnlSalvar: TPanel
+          Left = 597
+          Top = 0
+          Width = 170
+          Height = 46
+          Cursor = crHandPoint
+          Align = alRight
+          BevelOuter = bvNone
+          Caption = 'SALVAR (F2)'
+          Color = 10707477
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 0
+          object imgSalvar: TImage
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 46
+            Height = 40
+            Cursor = crHandPoint
+            Align = alLeft
+            Center = True
+            Picture.Data = {
+              0B546478504E47496D61676589504E470D0A1A0A0000000D4948445200000018
+              000000180806000000E0773DF80000011749444154484BED96C151C3301045F7
+              DF7C838B47D62DA98074001D0015001DA493B8845041520229810AE026D9175F
+              3DBE7C663349C618052B9A7061A2199FB47ACFDAD5DA42D334D75DD72D483ECB
+              190680A531E6658F82F77E2D22F701F63BC9798C134029223707684FA2028620
+              2437D6DABBD05C5DD73300573A97E7F9C639F706E0B61FBBDF4992A00F2C8A02
+              2181CA54F2A782AD242545B13B481678EF4B923305689D8EA52859302C7C9220
+              E678C6C41CAD41CCE298987F2800F0688CD1CFC7C9A3AAAA0792AB6F1D3DEC03
+              EDCC93C9BD0543DE8F1A5C0497148D1EB0D114919C5A6B3F47498100E7DC04C0
+              C7AF7D20220A4F1288C864F71C1CFABB5B02784A79E3B135245FA1D796B66DCB
+              734B149E65D9FC0BE8FAE883311F54210000000049454E44AE426082}
+            ExplicitHeight = 43
+          end
+        end
+        object pnlCancelar: TPanel
+          Left = 427
+          Top = 0
+          Width = 170
+          Height = 46
+          Cursor = crHandPoint
+          Align = alRight
+          BevelOuter = bvNone
+          Caption = 'CANCELAR'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = cl3DLight
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          OnClick = pnlCancelarClick
+        end
+      end
+      object pnlStatus: TPanel
+        Left = 32
+        Top = 0
+        Width = 767
+        Height = 46
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        BevelOuter = bvNone
+        Color = 10707477
+        ParentBackground = False
+        ShowCaption = False
+        TabOrder = 2
+        object lblStatus: TLabel
+          AlignWithMargins = True
+          Left = 10
+          Top = 25
+          Width = 70
+          Height = 18
+          Margins.Left = 10
+          Margins.Top = 25
+          Align = alLeft
+          Caption = 'INSERINDO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitHeight = 17
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,150 @@
+unit Simplex.View.Principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  dxGDIPlusClasses, JvExControls, JvButton, JvTransparentButton,
+  Vcl.WinXCtrls, System.Generics.Collections, Vcl.AppEvnts;
+
+type
+  TfrmPrincipal = class(TForm)
+    btnColaborador: TButton;
+    btnCargo: TButton;
+    pnlTopo: TPanel;
+    pnlLogo: TPanel;
+    imgLogo: TImage;
+    pnlAvatar: TPanel;
+    lblUsuarioLogado: TLabel;
+    imgAvatar: TImage;
+    pnlMain: TPanel;
+    pnlForm: TPanel;
+    pnlConfiguracoes: TPanel;
+    pnlRelatorios: TPanel;
+    pnlEstoque: TPanel;
+    pnlFinanceiro: TPanel;
+    pnlCompras: TPanel;
+    pnlCadastros: TPanel;
+    pnlDashboard: TPanel;
+    pnlVendas2: TPanel;
+    imgWallpaper: TImage;
+    lbl1: TLabel;
+    ApplicationEvents: TApplicationEvents;
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnFinanceiroClick(Sender: TObject);
+    procedure pnlFormClick(Sender: TObject);
+    procedure btn3Click(Sender: TObject);
+    procedure pnlCadastrosClick(Sender: TObject);
+    procedure ApplicationEventsModalBegin(Sender: TObject);
+    procedure ApplicationEventsModalEnd(Sender: TObject);
+  private
+    ListaPanelClicado : TObjectList<TPanel>;
+//    procedure SimularBordaPanelEnter(Value: TShape);
+//    procedure SimularBordaPanelExit(Value: TShape);
+    procedure SimularCliquePanel(Value : TPanel);
+
+  public
+    { Public declarations }
+  end;
+
+  Const CorSelecionada = TColor($00A36215); {RGB(45,47,50) 001C1916    0039342E}
+        CorPadrao      = TColor($00322F2D); {RGB(22,25,28)}
+var
+  frmPrincipal: TfrmPrincipal;
+
+implementation
+
+uses
+  Gerenciador.Form, Simplex.View.Menu.Cadastros, Simplex.View.SQLMonitor,
+  Unit1, Fundo.View.Padrao;
+
+{$R *.dfm}
+
+procedure TfrmPrincipal.ApplicationEventsModalBegin(Sender: TObject);
+begin
+  frmFundo.Show;
+end;
+
+procedure TfrmPrincipal.ApplicationEventsModalEnd(Sender: TObject);
+begin
+  frmFundo.Hide;
+end;
+
+procedure TfrmPrincipal.btn3Click(Sender: TObject);
+var
+  FrmSQLMonitor: TSqlMonitorForm;
+
+begin
+  SimularCliquePanel(pnlDashboard);
+
+  FrmSQLMonitor := TSqlMonitorForm.GetInstance;
+  FrmSQLMonitor.Show;
+
+end;
+
+procedure TfrmPrincipal.btnFinanceiroClick(Sender: TObject);
+begin
+  SimularCliquePanel(pnlFinanceiro);
+end;
+
+procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  ListaPanelClicado.Clear;
+  FreeAndNil(ListaPanelClicado);
+end;
+
+procedure TfrmPrincipal.FormShow(Sender: TObject);
+begin
+  ListaPanelClicado := TObjectList<TPanel>.Create;
+end;
+
+procedure TfrmPrincipal.pnlCadastrosClick(Sender: TObject);
+//var
+//  FrmClientes : TfrmClientes;
+begin
+  _Gerenciador.AddForm('frmMenuCadastros', TfrmMenuCadastros, pnlForm, True);
+  SimularCliquePanel(pnlCadastros);
+//  FrmClientes := TfrmClientes.Create(self);
+//  FrmClientes.ShowModal;
+//  FreeAndNil(FrmClientes);
+end;
+
+procedure TfrmPrincipal.pnlFormClick(Sender: TObject);
+begin
+
+end;
+
+{$REGION ' Controle visual dos componentes'}
+
+//procedure TfrmPrincipal.SimularBordaPanelEnter(Value: TShape);
+//begin
+//  Value.Visible := True;
+//end;
+
+//procedure TfrmPrincipal.SimularBordaPanelExit(Value: TShape);
+//begin
+//  Value.Visible := False;
+//end;
+
+procedure TfrmPrincipal.SimularCliquePanel(Value : TPanel);
+begin
+  for var contador : integer := 0 to Pred(ListaPanelClicado.Count) do
+  begin
+    ListaPanelClicado.Items[contador].Color := CorPadrao;
+  end;
+
+  case ListaPanelClicado.Contains(Value) of
+    True : ;
+    False: ListaPanelClicado.Add(Value);
+  end;
+  Value.Color := CorSelecionada;
+end;
+
+{$ENDREGION}
+
+
+initialization
+  ReportMemoryLeaksOnShutdown := True;
+end.

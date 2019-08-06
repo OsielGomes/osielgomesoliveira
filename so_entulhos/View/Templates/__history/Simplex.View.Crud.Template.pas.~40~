@@ -1,0 +1,117 @@
+unit Simplex.View.Crud.Template;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.WinXCtrls, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit, cxNavigator,
+  dxDateRanges, cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData, cxGridLevel,
+  cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid, cxClasses, cxImage,
+  System.ImageList, Vcl.ImgList, cxImageList, Vcl.WinXPanels, cxImageComboBox, cxGridBandedTableView,
+  cxGridDBBandedTableView;
+
+type
+  TfrmCrud = class(TForm)
+    pnlMain: TPanel;
+    pnlTopo: TPanel;
+    lblTelaAtual: TLabel;
+    pnlComponentes: TPanel;
+    pnlBotoesTop: TPanel;
+    edtPesquisar: TSearchBox;
+    pnlBotaoAdicionar: TPanel;
+    style: TcxStyleRepository;
+    groupbyBox: TcxStyle;
+    contentOdd: TcxStyle;
+    content: TcxStyle;
+    contentEven: TcxStyle;
+    selection: TcxStyle;
+    header: TcxStyle;
+    inactive: TcxStyle;
+    cxgrd1: TcxGrid;
+    gridlvl1: TcxGridLevel;
+    corGroupbyBox: TcxStyle;
+    imgList: TcxImageList;
+    dsPrincipal: TDataSource;
+    cardMain: TCardPanel;
+    cardGrid: TCard;
+    shpDivisao: TShape;
+    bandaPrincipal: TcxGridDBBandedTableView;
+    colbandacxgrd1DBBandedTableView1Column1: TcxGridDBBandedColumn;
+    colbandacxgrd1DBBandedTableView1Column2: TcxGridDBBandedColumn;
+    corBandHeader: TcxStyle;
+    lblHome: TLabel;
+    lbl1: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure bandaPrincipalCustomDrawBandHeader(Sender: TcxGridBandedTableView; ACanvas: TcxCanvas;
+      AViewInfo: TcxGridBandHeaderViewInfo; var ADone: Boolean);
+    procedure bandaPrincipalCustomDrawColumnHeader(Sender: TcxGridTableView; ACanvas: TcxCanvas;
+      AViewInfo: TcxGridColumnHeaderViewInfo; var ADone: Boolean);
+    procedure lblHomeClick(Sender: TObject);
+    procedure lblHomeMouseEnter(Sender: TObject);
+    procedure lblHomeMouseLeave(Sender: TObject);
+  protected
+    class var
+      FInstance: TfrmCrud;
+  private
+
+  public
+    class function GetInstance: TfrmCrud;
+  end;
+
+var
+  frmCrud: TfrmCrud;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCrud.bandaPrincipalCustomDrawBandHeader(Sender: TcxGridBandedTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridBandHeaderViewInfo; var ADone: Boolean);
+begin
+  bandaPrincipal.OnCustomDrawBandHeader := nil;
+  ADone := True;
+  AViewInfo.Borders := [bBottom];
+  AViewInfo.Paint(ACanvas);
+  bandaPrincipal.OnCustomDrawBandHeader := bandaPrincipalCustomDrawBandHeader;
+end;
+
+procedure TfrmCrud.bandaPrincipalCustomDrawColumnHeader(Sender: TcxGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridColumnHeaderViewInfo; var ADone: Boolean);
+begin
+  bandaPrincipal.OnCustomDrawColumnHeader := nil;
+  ADone := True;
+  AViewInfo.Borders := [bBottom];
+  AViewInfo.Paint(ACanvas);
+  bandaPrincipal.OnCustomDrawColumnHeader := bandaPrincipalCustomDrawColumnHeader;
+end;
+
+procedure TfrmCrud.FormCreate(Sender: TObject);
+begin
+  Self.BorderStyle := bsNone;
+  Self.WindowState := wsMaximized;
+end;
+
+class function TfrmCrud.GetInstance: TfrmCrud;
+begin
+  if FInstance = nil then
+    FInstance := TfrmCrud.Create(Self);
+  Result := FInstance;
+end;
+
+procedure TfrmCrud.lblHomeClick(Sender: TObject);
+begin
+  Hide;
+end;
+
+procedure TfrmCrud.lblHomeMouseEnter(Sender: TObject);
+begin
+  lblHome.Font.Style := [fsBold];
+end;
+
+procedure TfrmCrud.lblHomeMouseLeave(Sender: TObject);
+begin
+  lblHome.Font.Style := [];
+end;
+
+end.

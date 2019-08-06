@@ -1,0 +1,20 @@
+unit Simplex.Interfaces.Conexao.Aurelius;
+
+interface
+uses
+  Aurelius.Drivers.Interfaces;
+
+type
+  iConexaoAurelius = interface
+    ['{5C3BF663-8BD6-4B01-989D-6A13C99489A8}']
+    function Conn : IDBConnection;
+  end;
+
+  iFactoryConexao = interface
+    ['{2163087D-27F0-4322-96B5-67A41B9CF43B}']
+  end;
+
+
+implementation
+
+end.

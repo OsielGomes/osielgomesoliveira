@@ -1,0 +1,459 @@
+object frmCrud: TfrmCrud
+  Left = 0
+  Top = 0
+  ClientHeight = 605
+  ClientWidth = 1087
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlMain: TPanel
+    Left = 0
+    Top = 0
+    Width = 1087
+    Height = 605
+    Align = alClient
+    BevelOuter = bvNone
+    Color = 16382457
+    ParentBackground = False
+    ShowCaption = False
+    TabOrder = 0
+    DesignSize = (
+      1087
+      605)
+    object pnlTopo: TPanel
+      Left = 0
+      Top = 0
+      Width = 1087
+      Height = 98
+      Align = alTop
+      BevelOuter = bvNone
+      Color = 10707477
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      Padding.Left = 15
+      Padding.Top = 3
+      Padding.Right = 17
+      Padding.Bottom = 3
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 0
+      DesignSize = (
+        1087
+        98)
+      object lblTelaAtual: TLabel
+        AlignWithMargins = True
+        Left = 119
+        Top = 22
+        Width = 45
+        Height = 58
+        Margins.Top = 19
+        Margins.Bottom = 15
+        Align = alLeft
+        Caption = 'Clientes'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitLeft = 122
+        ExplicitHeight = 17
+      end
+      object lblHome: TLabel
+        AlignWithMargins = True
+        Left = 18
+        Top = 18
+        Width = 75
+        Height = 62
+        Cursor = crHandPoint
+        Margins.Top = 15
+        Margins.Bottom = 15
+        Align = alLeft
+        Alignment = taCenter
+        Caption = 'Cadastros'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -17
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        OnClick = lblHomeClick
+        OnMouseEnter = lblHomeMouseEnter
+        OnMouseLeave = lblHomeMouseLeave
+        ExplicitHeight = 23
+      end
+      object lbl1: TLabel
+        AlignWithMargins = True
+        Left = 99
+        Top = 22
+        Width = 14
+        Height = 58
+        Margins.Top = 19
+        Margins.Bottom = 15
+        Align = alLeft
+        Caption = '->'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitLeft = 102
+        ExplicitHeight = 17
+      end
+      object pnlBotaoAdicionar: TPanel
+        Left = 853
+        Top = 16
+        Width = 145
+        Height = 30
+        Cursor = crHandPoint
+        Anchors = [akTop, akRight]
+        BevelOuter = bvNone
+        Caption = 'NOVO'
+        Color = 6826319
+        Ctl3D = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        Font.Quality = fqClearType
+        ParentBackground = False
+        ParentCtl3D = False
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object pnlComponentes: TPanel
+      Left = 18
+      Top = 64
+      Width = 1055
+      Height = 521
+      Anchors = [akLeft, akTop, akRight, akBottom]
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      ShowCaption = False
+      TabOrder = 1
+      object cardMain: TCardPanel
+        Left = 0
+        Top = 0
+        Width = 1055
+        Height = 521
+        Align = alClient
+        ActiveCard = cardGrid
+        BevelOuter = bvNone
+        Caption = 'cardMain'
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 0
+        object cardGrid: TCard
+          Left = 0
+          Top = 0
+          Width = 1055
+          Height = 521
+          Caption = 'cardGrid'
+          CardIndex = 0
+          Color = clWhite
+          ParentBackground = False
+          TabOrder = 0
+          object pnlBotoesTop: TPanel
+            Left = 0
+            Top = 0
+            Width = 1055
+            Height = 73
+            Align = alTop
+            BevelOuter = bvNone
+            Color = clWhite
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 0
+            DesignSize = (
+              1055
+              73)
+            object shpDivisao: TShape
+              Left = 0
+              Top = 71
+              Width = 1055
+              Height = 2
+              Align = alBottom
+              Brush.Color = 3552889
+              Pen.Style = psClear
+              ExplicitTop = 72
+            end
+            object edtPesquisar: TSearchBox
+              Left = 689
+              Top = 19
+              Width = 350
+              Height = 27
+              Alignment = taCenter
+              Anchors = [akTop, akRight, akBottom]
+              AutoSize = False
+              BevelEdges = []
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              Color = clWhite
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -16
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+              TextHint = 'Digite aqui sua pesquisa '
+              ButtonWidth = 20
+            end
+          end
+          object cxgrd1: TcxGrid
+            AlignWithMargins = True
+            Left = 5
+            Top = 73
+            Width = 1045
+            Height = 438
+            Margins.Left = 5
+            Margins.Top = 0
+            Margins.Right = 5
+            Margins.Bottom = 10
+            Align = alClient
+            BevelEdges = []
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BorderStyle = cxcbsNone
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            LookAndFeel.Kind = lfUltraFlat
+            LookAndFeel.NativeStyle = False
+            LookAndFeel.ScrollbarMode = sbmDefault
+            object bandaPrincipal: TcxGridDBBandedTableView
+              Navigator.Buttons.CustomButtons = <>
+              DataController.DataSource = dsPrincipal
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <>
+              DataController.Summary.SummaryGroups = <>
+              Images = imgList
+              OptionsSelection.CellSelect = False
+              OptionsView.DataRowHeight = 40
+              OptionsView.GridLines = glNone
+              OptionsView.HeaderHeight = 40
+              Styles.Content = content
+              Styles.ContentEven = contentEven
+              Styles.ContentOdd = contentOdd
+              Styles.GroupByBox = corGroupbyBox
+              Styles.Header = header
+              Styles.Inactive = inactive
+              Styles.Selection = selection
+              Styles.BandHeader = corBandHeader
+              OnCustomDrawColumnHeader = bandaPrincipalCustomDrawColumnHeader
+              Bands = <
+                item
+                  Caption = 'Informa'#231#245'es gerais'
+                  FixedKind = fkRight
+                  Width = 918
+                end
+                item
+                  Caption = 'A'#231#245'es'
+                  FixedKind = fkRight
+                  Options.Moving = False
+                  Options.Sizing = False
+                end>
+              OnCustomDrawBandHeader = bandaPrincipalCustomDrawBandHeader
+              object colbandacxgrd1DBBandedTableView1Column1: TcxGridDBBandedColumn
+                PropertiesClassName = 'TcxImageComboBoxProperties'
+                Properties.DefaultImageIndex = 0
+                Properties.Images = imgList
+                Properties.Items = <>
+                Options.Editing = False
+                Options.Filtering = False
+                Options.FilteringWithFindPanel = False
+                Options.Focusing = False
+                Options.ShowEditButtons = isebNever
+                Options.Grouping = False
+                Options.ShowCaption = False
+                Options.Sorting = False
+                Width = 45
+                Position.BandIndex = 1
+                Position.ColIndex = 1
+                Position.RowIndex = 0
+              end
+              object colbandacxgrd1DBBandedTableView1Column2: TcxGridDBBandedColumn
+                PropertiesClassName = 'TcxImageComboBoxProperties'
+                Properties.DefaultImageIndex = 1
+                Properties.Images = imgList
+                Properties.Items = <>
+                Options.Editing = False
+                Options.Filtering = False
+                Options.FilteringWithFindPanel = False
+                Options.Focusing = False
+                Options.ShowEditButtons = isebNever
+                Options.Grouping = False
+                Options.ShowCaption = False
+                Options.Sorting = False
+                Width = 45
+                Position.BandIndex = 1
+                Position.ColIndex = 0
+                Position.RowIndex = 0
+              end
+            end
+            object gridlvl1: TcxGridLevel
+              GridView = bandaPrincipal
+            end
+          end
+        end
+      end
+    end
+  end
+  object style: TcxStyleRepository
+    Left = 880
+    Top = 105
+    PixelsPerInch = 96
+    object groupbyBox: TcxStyle
+      AssignedValues = [svColor, svFont, svTextColor]
+      Color = 3288877
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -9
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      TextColor = clGray
+    end
+    object contentOdd: TcxStyle
+      AssignedValues = [svColor, svFont]
+      Color = 15131101
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+    end
+    object content: TcxStyle
+      AssignedValues = [svColor, svFont]
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+    end
+    object contentEven: TcxStyle
+      AssignedValues = [svColor, svFont]
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+    end
+    object selection: TcxStyle
+      AssignedValues = [svColor, svFont]
+      Color = 10707477
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+    end
+    object header: TcxStyle
+      AssignedValues = [svColor, svFont, svTextColor]
+      Color = 3288877
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      TextColor = clWhite
+    end
+    object inactive: TcxStyle
+      AssignedValues = [svColor]
+      Color = clWhite
+    end
+    object corGroupbyBox: TcxStyle
+      AssignedValues = [svColor, svFont, svTextColor]
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -11
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      TextColor = clGray
+    end
+    object corBandHeader: TcxStyle
+      AssignedValues = [svColor, svFont, svTextColor]
+      Color = 3288877
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      TextColor = clWhite
+    end
+  end
+  object imgList: TcxImageList
+    SourceDPI = 96
+    DrawingStyle = dsTransparent
+    Height = 24
+    Width = 24
+    FormatVersion = 1
+    DesignInfo = 1245887
+    ImageInfo = <
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+          F8000000097048597300000EC400000EC401952B0E1B0000021B494441544889
+          A596316B14511485BFB304911416B2A058885808A6889DA00405B1B00CA65064
+          1F12B00AA4108962B18868AA401A4B118B3BA4482104B412149BE00F08568B45
+          2A91206211C2227B2C766699ACBB9BECE4C23077DEBC7BCEBB67CEBC19512152
+          4AC78167C003E027B002AC4544BB7F6EAD0A410EFC18A80353C01B6023A5543F
+          3241A3D1380D3C016AB67B38B66FD95EEC9F3F312E81A46BC0649E97C7A1DBCD
+          BE18AB8394D205E03A3007ACDB6E175DE4E7CF9509524A13C00B60C1F65BE023
+          3027692BEFE01B90F5D78D23D10DDBB7F3FC9CEDD792368187B6A725B522E24F
+          A50E725B3E97342189E200AE021B922681F7836A0F2BD15DE032F4B4C67691D7
+          804F11D1A94490523A012CDBEECD2DD913600DD81C563FF219A4940096803385
+          25CBD6047680E588188A715007E78185F2409F2D5F01DF470168D88D9452CD76
+          48BA57004AEA9D816DE06244EC8E221825D18CA4D9DE4AF64BD4B1DDCCB26C24
+          380C9128D77E997C4B28472ECD5749EB07810F2500668199B25B8A5C52DBF6D3
+          88D8AB44906F09F3C02349AD62BCE49E77F91B7CA8F88FC0761D381611ABC015
+          E02550AC760F6846C4DFCA0492A6812F0011B113114DE012B005AC4644ABBF66
+          2C02BA7BFA3E096C9F05B66DAF8C030E036C6AFB94A4EDE23AA5340D346DDFCF
+          B2ECF79109E87E673BB9556F028BC09D2CCB7E8C0B3E9040D249BA7F0CBB401B
+          988F885F55C061B08B5AC094ED0FC0D251C001FE019162D33DAB092797000000
+          0049454E44AE426082}
+      end
+      item
+        ImageClass = 'TdxPNGImage'
+        Image.Data = {
+          89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+          F8000000097048597300000EC400000EC401952B0E1B00000123494441544889
+          ED96314EC4301045DF5FAD28A810E2124894DC80869A96E41814548833D0213A
+          47E20C700EC411B6A0A4405B443B1428C87126E3D0A2FDD52463CFFFF347962D
+          02344DB396F46266E70092CA25EF6676D175DDD75C8D754420A937B36B49075E
+          DECC7A49DBB046A1F84CD2BD99796A87A248C2CC0611A318B84B29BDB91D483A
+          01AEE68A674546028AF50FF94769D10678CA550E9B6BCAB3783312542A6CDBF6
+          10B80456730441F1D794D267D401C031F00CB8831DC8BC183805AA04BFF07C8E
+          E6539001B05ABAB0CC99D924F6C85D82DC778F34B068827F6A914754B3620EAE
+          45D1695D709247083BF01059B49820DF58FEFB2BF61655B1B7A80A8F6027A987
+          BA4545BC0526AF0B6F061FC02D70031C9549EF960376C0233F57EE08DF688DEA
+          0D445CF6850000000049454E44AE426082}
+      end>
+  end
+  object dsPrincipal: TDataSource
+    Left = 802
+    Top = 328
+  end
+end

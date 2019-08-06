@@ -1,0 +1,223 @@
+unit Simplex.ViewModel.Pessoa;
+
+{           Todos os direitos reservados           }
+{      Desenvolvedor responsável: Osiel Gomes      }
+{            Contato: byosiel@gmail.com            }
+
+interface
+uses
+  Simplex.Interfaces.Crud, Data.DB, Aurelius.Bind.Dataset,
+  Simplex.Model.Cadastro.Pessoa,
+  System.SysUtils, Winapi.Messages, Vcl.Controls, Vcl.Dialogs, Vcl.StdCtrls,
+  Vcl.Mask, Vcl.ExtCtrls, Simplex.Interfaces.CaixaDialogo;
+
+type
+  TViewModelPessoa = class(TInterfacedObject, iViewModelPessoa, iViewModelControls)
+    private
+      Model : TModelCadastroPessoa;
+      CaixaDialogo : iMessageDialog;
+      dsEnderecos : TDataSource;
+      dsContatos  : TDataSource;
+      dsReference : TDataSource;
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New : iViewModelPessoa;
+
+      function InserirPessoa          : iViewModelPessoa;
+      function InserirEndereco        : iViewModelPessoa;
+      function InserirContato         : iViewModelPessoa;
+      function EditarPessoa           : iViewModelPessoa;
+      function SalvarPessoa           : iViewModelPessoa;
+      function DeletarPessoa          : iViewModelPessoa;
+      function DeletarContato         : iViewModelPessoa;
+      function DeletarEndereco        : iViewModelPessoa;
+      function Cancelar               : iViewModelPessoa;
+      function Open                   : iViewModelPessoa; overload;
+      function Open(aValue : Integer) : iViewModelPessoa; overload;
+      function DataSet(aValue : TDataSource) : iViewModelPessoa;
+      function DataSetEnderecos(aValue : TDataSource) : iViewModelPessoa;
+      function DataSetContatos(aValue : TDataSource) : iViewModelPessoa;
+      function Entidade       : iEntity;
+      function Controls : iViewModelControls;
+      //interface iviewmodelControls
+      function StatusDataSource(aDataSource : TDataSource) : iViewModelControls;
+      function BrushPanel(var aValue : TPanel): iViewModelControls;
+      function StatusLabel(var aValue : TLabel): iViewModelControls;
+      function canClose : Boolean;
+      function Dialog: iMessageDialog;
+
+  end;
+
+implementation
+
+uses
+  Vcl.Graphics, Simplex.View.CaixaDialogo;
+
+{ TViewModelPessoa }
+
+function TViewModelPessoa.BrushPanel(var aValue : TPanel): iViewModelControls;
+begin
+  Result := Self;
+  case dsReference.State of
+    dsInactive:     aValue.Color := ColorToRGB($00A66F17);//Azul
+    dsBrowse:       aValue.Color := ColorToRGB($00A66F17);//Azul
+    dsEdit:         aValue.Color := ColorToRGB($005747BF);//Vermelho
+    dsInsert:       aValue.Color := ColorToRGB($005747BF);//Vermelho
+  end;
+end;
+
+function TViewModelPessoa.Cancelar: iViewModelPessoa;
+begin
+  Model.Cancel;
+end;
+
+function TViewModelPessoa.canClose: Boolean;
+begin
+  Result := False;
+  if dsReference.State in [dsBrowse] then
+    Result := True;
+end;
+
+function TViewModelPessoa.StatusLabel(var aValue : TLabel): iViewModelControls;
+begin
+  Result := Self;
+  case dsReference.State of
+    dsInactive: aValue.Caption := 'INATIVO';
+    dsBrowse: aValue.Caption :=   'NAVEGANDO';
+    dsEdit: aValue.Caption :=     'EDITANDO';
+    dsInsert: aValue.Caption :=   'INSERINDO';
+  end;
+end;
+
+function TViewModelPessoa.Controls: iViewModelControls;
+begin
+  Result := Self;
+end;
+
+constructor TViewModelPessoa.Create;
+begin
+  inherited;
+  Model := TModelCadastroPessoa.New;
+end;
+
+function TViewModelPessoa.DataSet(aValue: TDataSource): iViewModelPessoa;
+begin
+  Result := Self;
+  Model.DataSetPessoa(aValue);
+end;
+
+function TViewModelPessoa.DataSetContatos(aValue: TDataSource): iViewModelPessoa;
+begin
+  Result := Self;
+  Model.DataSetContatos(aValue);
+  dsContatos := aValue;
+end;
+
+function TViewModelPessoa.DataSetEnderecos(aValue: TDataSource): iViewModelPessoa;
+begin
+  Result := Self;
+  Model.DataSetEnderecos(aValue);
+  dsEnderecos := aValue;
+end;
+
+function TViewModelPessoa.DeletarContato: iViewModelPessoa;
+begin
+  Result := Self;
+  frmCaixaDialogo.MessageDialog('Tem certeza que deseja deletar esse registro?').Question.Buttons.YesNo.Show;
+  case frmCaixaDialogo.ModalResult of
+    mrYes: Model.Delete(dsContatos);
+    mrNo:  ;
+    mrOk:  ;
+    mrCancel: ;
+  end;
+end;
+
+function TViewModelPessoa.DeletarEndereco: iViewModelPessoa;
+begin
+  Result := Self;
+  frmCaixaDialogo.MessageDialog('Tem certeza que deseja deletar esse registro?').Warning.Buttons.YesNo.Show;
+  case frmCaixaDialogo.ModalResult of
+    mrYes: Model.Delete(dsEnderecos);
+    mrNo:  ;
+    mrOk:  ;
+    mrCancel: ;
+  end;
+end;
+
+function TViewModelPessoa.DeletarPessoa: iViewModelPessoa;
+begin
+  Result := Self;
+end;
+
+destructor TViewModelPessoa.Destroy;
+begin
+  FreeAndNil(Model);
+  inherited;
+end;
+
+function TViewModelPessoa.Dialog: iMessageDialog;
+begin
+  Result := frmCaixaDialogo.Dialog;
+end;
+
+function TViewModelPessoa.EditarPessoa: iViewModelPessoa;
+begin
+  Result := Self;
+  Model.Edit;
+end;
+
+function TViewModelPessoa.Entidade: iEntity;
+begin
+  Result := Model.Entidade;
+end;
+
+function TViewModelPessoa.StatusDataSource(aDataSource: TDataSource): iViewModelControls;
+begin
+  Result := Self;
+  dsReference := aDataSource;
+end;
+
+function TViewModelPessoa.InserirContato: iViewModelPessoa;
+begin
+  Result := Self;
+  Model.InsertContact;
+end;
+
+function TViewModelPessoa.InserirEndereco: iViewModelPessoa;
+begin
+  Result := Self;
+  Model.InsertAddress;
+end;
+
+function TViewModelPessoa.InserirPessoa: iViewModelPessoa;
+begin
+  Result := Self;
+  Model.Insert;
+end;
+
+class function TViewModelPessoa.New: iViewModelPessoa;
+begin
+  Result := Self.Create;
+end;
+
+function TViewModelPessoa.Open(aValue: Integer): iViewModelPessoa;
+begin
+  Result := Self;
+  Model.Open(aValue);
+end;
+
+function TViewModelPessoa.Open: iViewModelPessoa;
+begin
+  Result := Self;
+  Model.Open;
+end;
+
+function TViewModelPessoa.SalvarPessoa: iViewModelPessoa;
+begin
+  Result := Self;
+  Model.Save;
+end;
+
+end.
+

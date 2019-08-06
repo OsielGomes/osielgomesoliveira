@@ -1,0 +1,114 @@
+unit Simplex.View.Clientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Simplex.View.Crud.Template, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData, cxImage, System.ImageList, Vcl.ImgList,
+  cxImageList, cxClasses, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridCustomView,
+  cxGrid, Vcl.StdCtrls, Vcl.WinXCtrls, Vcl.WinXPanels, Vcl.ExtCtrls,
+  Simplex.Interfaces.Crud, cxImageComboBox, cxCalc, cxTextEdit, cxGridBandedTableView, cxGridDBBandedTableView;
+
+type
+  TfrmClientes = class(TfrmCrud)
+    colPrincipalColumn1: TcxGridDBBandedColumn;
+    colPrincipalColumn2: TcxGridDBBandedColumn;
+    colPrincipalColumn3: TcxGridDBBandedColumn;
+    selection_ligth: TcxStyle;
+    procedure FormCreate(Sender: TObject);
+    procedure pnlBotaoAdicionarClick(Sender: TObject);
+    procedure bandaPrincipalCellClick(Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+      AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+    procedure bandaPrincipalMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+  private
+    FViewModel : iViewModelPessoa;
+
+    class var
+      FInstance: TfrmCrud;
+
+    procedure OpenForm(aValue: String);
+
+  public
+    class function GetInstance: TfrmCrud;
+    constructor Create(AOwner: TComponent); override;
+  end;
+
+var
+  frmClientes: TfrmClientes;
+
+implementation
+uses
+  Simplex.ViewModel.Pessoa, Simplex.View.Edit.Cliente;
+
+{$R *.dfm}
+
+procedure TfrmClientes.bandaPrincipalCellClick(Sender: TcxCustomGridTableView;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+begin
+  if ACellViewInfo.Item.Caption = 'EDIT' then
+    OpenForm('EDIT');
+end;
+
+procedure TfrmClientes.bandaPrincipalMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+var
+  AGridSite: TcxGridSite;
+  AGridView: TcxGridTableView;
+  AHitTest: TcxCustomGridHitTest;
+begin
+  AGridSite := Sender as TcxGridSite;
+  AGridView := AGridSite.GridView as TcxGridTableView;
+  AHitTest := AGridView.GetHitTest(X, Y);
+  if (AHitTest is TcxGridRecordCellHitTest) and
+    (
+      ( (AHitTest as TcxGridRecordCellHitTest).Item.Caption = 'EDIT')  or
+      ( (AHitTest as TcxGridRecordCellHitTest).Item.Caption = 'DELETE')
+    ) then
+      AGridSite.Cursor := crHandPoint
+  else
+    AGridSite.Cursor := crDefault;
+
+end;
+
+constructor TfrmClientes.Create(AOwner: TComponent);
+begin
+  inherited;
+
+end;
+
+procedure TfrmClientes.FormCreate(Sender: TObject);
+begin
+  inherited;
+  FViewModel := TViewModelPessoa.New;
+  FViewModel.DataSet(dsPrincipal).Open(1);
+end;
+
+class function TfrmClientes.GetInstance: TfrmCrud;
+begin
+  if FInstance = nil then
+    FInstance := TfrmClientes.Create;
+  Result := FInstance;
+end;
+
+procedure TfrmClientes.pnlBotaoAdicionarClick(Sender: TObject);
+begin
+  OpenForm('INSERT');
+end;
+
+procedure TfrmClientes.OpenForm(aValue : String);
+var
+  frmEditCliente : TfrmEditCliente;
+begin
+  frmEditCliente := TfrmEditCliente.Create(Self);
+  try
+    frmEditCliente.InsertEditCustomer(1);
+    frmEditCliente.ShowModal;
+  finally
+    if Assigned(frmEditCliente) then
+      frmEditCliente.Free;
+
+  end;
+end;
+
+end.

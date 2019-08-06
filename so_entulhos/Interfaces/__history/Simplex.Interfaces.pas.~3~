@@ -1,0 +1,12 @@
+unit Simplex.Interfaces;
+
+interface
+
+type
+  iCrud = interface
+    ['{FE7F3EBE-E3A5-4BD8-A241-869A15D4AF12}']
+  end;
+
+implementation
+
+end.

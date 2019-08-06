@@ -1,0 +1,42 @@
+unit Simplex.Dao.Conexao.Firedac;
+
+{           Todos os direitos reservados           }
+{      Desenvolvedor responsável: Osiel Gomes      }
+{            Contato: byosiel@gmail.com            }
+
+interface
+uses
+  Simplex.Interfaces.Conexao.Aurelius;
+
+type
+  TDaoConexaoAurelius = class(TInterfacedObject, iConexao)
+    private
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New : iConexao;
+
+  end;
+
+implementation
+
+{ TDaoConexaoAurelius }
+
+constructor TDaoConexaoAurelius.Create;
+begin
+  inherited;
+
+end;
+
+destructor TDaoConexaoAurelius.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TDaoConexaoAurelius.New: iConexao;
+begin
+  Result := Self.Create;
+end;
+
+end.

@@ -1,0 +1,49 @@
+unit Simplex.Interfaces.Crud;
+
+interface
+
+uses
+  Data.DB, Simplex.Entity.Pessoa, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls;
+
+type
+  iEntity = interface
+    ['{9835B439-168E-4A44-9A13-F25DB8102C33}']
+    function Pessoa : TPessoa;
+  end;
+
+  iViewModelControls = interface;
+
+  iViewModelPessoa = interface
+    ['{9B4123E4-E668-47CD-866B-31BC5E8DE686}']
+     function InserirPessoa          : iViewModelPessoa;
+     function InserirEndereco        : iViewModelPessoa;
+     function EditarPessoa           : iViewModelPessoa;
+     function SalvarPessoa           : iViewModelPessoa;
+     function DeletarPessoa          : iViewModelPessoa;
+     function Cancelar               : iViewModelPessoa;
+     function Open                   : iViewModelPessoa; overload;
+     function Open(aValue : Integer) : iViewModelPessoa; overload;
+     function DataSet(aValue : TDataSource) : iViewModelPessoa;
+     function DataSetEnderecos(aValue : TDataSource) : iViewModelPessoa;
+     function DataSetContatos(aValue : TDataSource) : iViewModelPessoa;
+     function Entidade       : iEntity;
+     //Controles de Tela
+     procedure MostrarOcultarTituloEdit(aEdit: TEdit; aLabel: TLabel); overload;
+     procedure MostrarOcultarTituloEdit(aEdit: TMaskEdit; aLabel: TLabel); overload;
+     function StatusPanel(aDataSource : TDataSource; aValue : TPanel): iViewModelPessoa;
+     function StatusLabel(aDataSource : TDataSource; aValue : TLabel): iViewModelPessoa;
+     function Controls : iViewModelControls;
+  end;
+
+  iViewModelControls = interface
+    ['{0539617E-920C-4106-A9CD-575A9EB7978E}']
+//    procedure MostrarOcultarTituloEdit(aEdit: TEdit; aLabel: TLabel); overload;
+//    procedure MostrarOcultarTituloEdit(aEdit: TMaskEdit; aLabel: TLabel); overload;
+    function Status(aDataSource : TDataSource) : iViewModelPessoa;
+    function BrushPanel(var aValue : TPanel): iViewModelPessoa;
+    function CaptionLabel(var aValue : TLabel): iViewModelPessoa;
+  end;
+
+implementation
+
+end.

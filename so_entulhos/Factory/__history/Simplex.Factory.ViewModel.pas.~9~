@@ -1,0 +1,51 @@
+unit Simplex.Factory.ViewModel;
+
+{           Todos os direitos reservados           }
+{      Desenvolvedor responsável: Osiel Gomes      }
+{            Contato: byosiel@gmail.com            }
+
+interface
+uses
+  Simplex.Interfaces.Crud, Simplex.Entity.Pessoa;
+
+
+type
+  TFactoryViewModel = class(TInterfacedObject, iFactoryCrud)
+    private
+      FEntidade : iEntidade;
+      FPessoa     : iCrud<TPessoa>;
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New : iFactoryCrud;
+      function Entidade : iEntidade;
+
+  end;
+
+implementation
+
+{ TFactoryViewModel }
+
+constructor TFactoryViewModel.Create;
+begin
+  inherited;
+
+end;
+
+destructor TFactoryViewModel.Destroy;
+begin
+
+  inherited;
+end;
+
+function TFactoryViewModel.Entidade: iEntidade;
+begin
+//  Result :=
+end;
+
+class function TFactoryViewModel.New: iFactoryCrud;
+begin
+  Result := Self.Create;
+end;
+
+end.

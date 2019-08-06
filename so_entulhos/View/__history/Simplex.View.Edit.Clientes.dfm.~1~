@@ -1,0 +1,13 @@
+inherited frmCrudEdit2: TfrmCrudEdit2
+  Caption = 'frmCrudEdit2'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlMain: TPanel
+    inherited pnlStatus: TPanel
+      inherited lblStatus: TLabel
+        ExplicitLeft = 10
+        ExplicitTop = 25
+      end
+    end
+  end
+end

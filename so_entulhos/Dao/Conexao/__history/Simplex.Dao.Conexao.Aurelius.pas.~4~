@@ -1,0 +1,49 @@
+unit Simplex.Dao.Conexao.Aurelius;
+
+{           Todos os direitos reservados           }
+{      Desenvolvedor responsável: Osiel Gomes      }
+{            Contato: byosiel@gmail.com            }
+
+interface
+uses
+  Simplex.Interfaces.Conexao.Aurelius, Aurelius.Drivers.Interfaces;
+
+type
+  TDaoConexaoAurelius = class(TInterfacedObject, iConexao)
+    private
+    FConn : IDBConnection;
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New : iConexao;
+      function Conn : IDBConnection;
+
+  end;
+
+implementation
+
+{ TDaoConexaoAurelius }
+
+function TDaoConexaoAurelius.Conn: IDBConnection;
+begin
+  Result := FConn;
+end;
+
+constructor TDaoConexaoAurelius.Create;
+begin
+  inherited;
+
+end;
+
+destructor TDaoConexaoAurelius.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TDaoConexaoAurelius.New: iConexao;
+begin
+  Result := Self.Create;
+end;
+
+end.

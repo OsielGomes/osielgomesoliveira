@@ -1,0 +1,40 @@
+unit Simplex.Dao.Conexao.Firedac;
+
+{           Todos os direitos reservados           }
+{      Desenvolvedor responsável: Osiel Gomes      }
+{            Contato: byosiel@gmail.com            }
+
+interface
+
+type
+  TMinhaClasse = class(TInterfacedObject, iMinhaClasse)
+    private
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New : iMinhaClasse;
+
+  end;
+
+implementation
+
+{ TMinhaClasse }
+
+constructor TMinhaClasse.Create;
+begin
+  inherited;
+
+end;
+
+destructor TMinhaClasse.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TMinhaClasse.New: iMinhaClasse;
+begin
+  Result := Self.Create;
+end;
+
+end.

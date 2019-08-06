@@ -1,0 +1,61 @@
+unit Simplex.Conexao.Aurelius;
+
+{           Todos os direitos reservados           }
+{      Desenvolvedor responsável: Osiel Gomes      }
+{            Contato: byosiel@gmail.com            }
+
+interface
+uses
+  Simplex.Interfaces.Conexao, Aurelius.Drivers.Interfaces,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
+  FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteDef, FireDAC.Phys.PG,
+  FireDAC.Comp.UI, FireDAC.Comp.Client, Data.DB,   System.SysUtils, Aurelius.Drivers.FireDac;
+
+type
+  TDaoConexaoAurelius = class(TInterfacedObject, iConexaoAurelius)
+    private
+    FConn : IDBConnection;
+    FConexao : TFDConnection;
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New : iConexaoAurelius;
+      function Conn : IDBConnection;
+
+  end;
+
+implementation
+
+{ TDaoConexaoAurelius }
+
+function TDaoConexaoAurelius.Conn: IDBConnection;
+begin
+   FConn := TFireDacConnectionAdapter.Create(FConexao, false);
+   Result := FConn;
+end;
+
+constructor TDaoConexaoAurelius.Create;
+begin
+  FConexao := TFDConnection.Create(nil);
+  FConexao.Params.DriverID := 'PG';
+  FConexao.Params.Database := 'simplex';
+  FConexao.Params.UserName := 'postgres';
+  FConexao.Params.Password := 'root';
+  FConexao.Params.Values['SERVER=127.0.0.1'];
+  FConexao.Connected := True;
+end;
+
+destructor TDaoConexaoAurelius.Destroy;
+begin
+  FreeAndNil(FConexao);
+  inherited;
+end;
+
+class function TDaoConexaoAurelius.New: iConexaoAurelius;
+begin
+  Result := Self.Create;
+end;
+
+end.

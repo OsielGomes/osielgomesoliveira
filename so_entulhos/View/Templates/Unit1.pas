@@ -1,0 +1,103 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Simplex.Interfaces.Crud, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    grid1: TDBGrid;
+    dsPessoas: TDataSource;
+    btnAbrir: TButton;
+    btnMonitor: TButton;
+    edtID: TLabeledEdit;
+    edtNome: TLabeledEdit;
+    btnInsert: TButton;
+    btnEdit: TButton;
+    btnDelete: TButton;
+    btnSave: TButton;
+    edtApelido: TLabeledEdit;
+    gridEnderecos: TDBGrid;
+    dsEnderecos: TDataSource;
+    dsContatos: TDataSource;
+    gridContatos: TDBGrid;
+    procedure btnMonitorClick(Sender: TObject);
+    procedure btnInsertClick(Sender: TObject);
+    procedure btnEditClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure dsPessoasDataChange(Sender: TObject; Field: TField);
+  private
+    FViewModel : iViewModelPessoa;
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+uses
+  Simplex.View.SQLMonitor, Simplex.ViewModel.Pessoa;
+
+{$R *.dfm}
+
+procedure TForm1.btnDeleteClick(Sender: TObject);
+begin
+  if MessageBox(Handle, 'Tem certeza que deseja deletar esse registro?', 'Mensagem do sistema', MB_YESNO+MB_ICONQUESTION ) = mrYes then
+    FViewModel.DeletarPessoa;
+end;
+
+procedure TForm1.btnEditClick(Sender: TObject);
+begin
+  FViewModel.EditarPessoa;
+end;
+
+procedure TForm1.btnInsertClick(Sender: TObject);
+begin
+  FViewModel.InserirPessoa;
+end;
+
+procedure TForm1.btnMonitorClick(Sender: TObject);
+var
+  Monitor : TSqlMonitorForm;
+begin
+  Monitor := TSqlMonitorForm.GetInstance;
+  Monitor.Show;
+end;
+
+procedure TForm1.btnSaveClick(Sender: TObject);
+begin
+  //Por objeto
+//  FViewModel.Entidade.Pessoa.NomeRazao       := edtNome.Text;
+//  FViewModel.Entidade.Pessoa.ApelidoFantasia := edtApelido.Text;
+//  FViewModel.SalvarPessoa;
+  //Pelo dataset
+  dsPessoas.DataSet.FieldByName('NOMERAZAO').AsString        := edtNome.Text;
+  dsPessoas.DataSet.FieldByName('APELIDOFANTASIA').AsString  := edtApelido.Text;
+  FViewModel.SalvarPessoa;
+end;
+
+procedure TForm1.dsPessoasDataChange(Sender: TObject; Field: TField);
+begin
+  case dsPessoas.DataSet.State of
+    dsBrowse:
+    begin
+      edtID.Text      := dsPessoas.DataSet.FieldByName('ID').AsString;
+      edtNome.Text    := dsPessoas.DataSet.FieldByName('NOMERAZAO').AsString;
+      edtApelido.Text := dsPessoas.DataSet.FieldByName('APELIDOFANTASIA').AsString;
+    end;
+  end;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  FViewModel := TViewModelPessoa.New;
+  FViewModel.DataSet(dsPessoas).DataSetEnderecos(dsEnderecos).DataSetContatos(dsContatos).Open;
+end;
+
+end.

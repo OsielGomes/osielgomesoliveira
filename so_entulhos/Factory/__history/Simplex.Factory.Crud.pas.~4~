@@ -1,0 +1,51 @@
+unit Simplex.Factory.Crud;
+
+{           Todos os direitos reservados           }
+{      Desenvolvedor responsável: Osiel Gomes      }
+{            Contato: byosiel@gmail.com            }
+
+interface
+uses
+  Simplex.Interfaces.Crud, Simplex.Entity.Pessoa;
+
+
+type
+  TFactoryCrud = class(TInterfacedObject, iFactoryCrud)
+    private
+      FEntidade : iEntity;
+      FPessoa     : iCrud<TPessoa>;
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New : iFactoryCrud;
+      function Entidade : iEntity;
+
+  end;
+
+implementation
+
+{ TFactoryCrud }
+
+constructor TFactoryCrud.Create;
+begin
+  inherited;
+
+end;
+
+destructor TFactoryCrud.Destroy;
+begin
+
+  inherited;
+end;
+
+function TFactoryCrud.Entidade: iEntity;
+begin
+  Result := FEntidade;
+end;
+
+class function TFactoryCrud.New: iFactoryCrud;
+begin
+  Result := Self.Create;
+end;
+
+end.

@@ -1,0 +1,13 @@
+unit Simplex.Interfaces.Conexao.Aurelius;
+
+interface
+
+type
+  iConexao = interface
+    ['{5C3BF663-8BD6-4B01-989D-6A13C99489A8}']
+    function Conexao : Conn;
+  end;
+
+implementation
+
+end.

@@ -1,0 +1,98 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Simplex.Interfaces.Crud, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    grid1: TDBGrid;
+    ds1: TDataSource;
+    btnAbrir: TButton;
+    btnMonitor: TButton;
+    edtID: TLabeledEdit;
+    edtNome: TLabeledEdit;
+    btnInsert: TButton;
+    btnEdit: TButton;
+    btnDelete: TButton;
+    btnSave: TButton;
+    edtApelido: TLabeledEdit;
+    procedure btnMonitorClick(Sender: TObject);
+    procedure btnInsertClick(Sender: TObject);
+    procedure btnEditClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure ds1DataChange(Sender: TObject; Field: TField);
+  private
+    FViewModel : iViewModelPessoa;
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+uses
+  Simplex.View.SQLMonitor, Simplex.ViewModel.Pessoa;
+
+{$R *.dfm}
+
+procedure TForm1.btnDeleteClick(Sender: TObject);
+begin
+  FViewModel.DeletarPessoa;
+end;
+
+procedure TForm1.btnEditClick(Sender: TObject);
+begin
+  FViewModel.EditarPessoa;
+end;
+
+procedure TForm1.btnInsertClick(Sender: TObject);
+begin
+  FViewModel.InserirPessoa;
+end;
+
+procedure TForm1.btnMonitorClick(Sender: TObject);
+var
+  Monitor : TSqlMonitorForm;
+begin
+  Monitor := TSqlMonitorForm.GetInstance;
+  Monitor.Show;
+end;
+
+procedure TForm1.btnSaveClick(Sender: TObject);
+begin
+  //Por objeto
+//  FViewModel.Entidade.Pessoa.NomeRazao       := edtNome.Text;
+//  FViewModel.Entidade.Pessoa.ApelidoFantasia := edtApelido.Text;
+//  FViewModel.SalvarPessoa;
+  //Pelo dataset
+  ds1.DataSet.FieldByName('NOMERAZAO').AsString        := edtNome.Text;
+  ds1.DataSet.FieldByName('APELIDOFANTASIA').AsString  := edtApelido.Text;
+  FViewModel.SalvarPessoa;
+end;
+
+procedure TForm1.ds1DataChange(Sender: TObject; Field: TField);
+begin
+  case ds1.DataSet.State of
+    dsBrowse:
+    begin
+      edtID.Text      := ds1.DataSet.FieldByName('ID').AsString;
+      edtNome.Text    := ds1.DataSet.FieldByName('NOMERAZAO').AsString;
+      edtApelido.Text := ds1.DataSet.FieldByName('APELIDOFANTASIA').AsString;
+    end;
+  end;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  FViewModel := TViewModelPessoa.New;
+  FViewModel.DataSet(ds1).Open;
+end;
+
+end.

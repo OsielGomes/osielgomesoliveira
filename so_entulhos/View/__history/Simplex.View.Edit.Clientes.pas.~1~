@@ -1,0 +1,24 @@
+unit Simplex.View.Edit.Clientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Simplex.View.CrudEdit.Template, Vcl.StdCtrls, dxGDIPlusClasses, Vcl.ExtCtrls;
+
+type
+  TfrmCrudEdit2 = class(TfrmCrudEdit)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCrudEdit2: TfrmCrudEdit2;
+
+implementation
+
+{$R *.dfm}
+
+end.
